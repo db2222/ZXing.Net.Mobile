@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Android.Views;
-using ApxLabs.FastAndroidCamera;
 
 namespace ZXing.Mobile.CameraAccess
 {
@@ -82,7 +81,7 @@ namespace ZXing.Mobile.CameraAccess
 			}
 		}
 
-		void HandleOnPreviewFrameReady(object sender, FastJavaByteArray fastArray)
+		void HandleOnPreviewFrameReady(object sender, byte[] data)
 		{
 			if (!CanAnalyzeFrame)
 				return;
@@ -94,7 +93,7 @@ namespace ZXing.Mobile.CameraAccess
 			{
 				try
 				{
-					DecodeFrame(fastArray);
+					DecodeFrame(data);
 				}
 				catch (Exception ex)
 				{
@@ -107,7 +106,7 @@ namespace ZXing.Mobile.CameraAccess
 			}, TaskContinuationOptions.OnlyOnFaulted);
 		}
 
-		void DecodeFrame(FastJavaByteArray fastArray)
+		void DecodeFrame(byte[] data)
 		{
 			var resolution = cameraController.CameraResolution;
 			var width = resolution.Width;
@@ -129,14 +128,11 @@ namespace ZXing.Mobile.CameraAccess
 
 			var start = PerformanceCounter.Start();
 
-			LuminanceSource fast = new FastJavaByteArrayYUVLuminanceSource(fastArray, width, height, 0, 0, width, height); // _area.Left, _area.Top, _area.Width, _area.Height);
+			LuminanceSource fast = new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);
 			if (rotate)
 				fast = fast.rotateCounterClockwise();
 
 			var result = barcodeReader.Decode(fast);
-
-			fastArray.Dispose();
-			fastArray = null;
 
 			PerformanceCounter.Stop(start,
 				"Decode Time: {0} ms (width: " + width + ", height: " + height + ", degrees: " + cDegrees + ", rotate: " +

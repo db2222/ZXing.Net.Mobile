@@ -1,15 +1,15 @@
-<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid13.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net10.0-android36.1;net10.0-ios26.5</TargetFrameworks>
 		<AssemblyName>ZXingNetMobile</AssemblyName>
 		<RootNamespace>ZXing.Net.Mobile</RootNamespace>
 		<PackageId>Respawnsive.ZXing.Net.Mobile</PackageId>
 		<PackageIcon>icon.png</PackageIcon>
-		<Summary>ZXing Barcode Scanning for your Xamarin.iOS and Xamarin.Android</Summary>
+		<Summary>ZXing Barcode Scanning for your .NET Android &amp; iOS apps</Summary>
 		<PackageTags></PackageTags>
 		<Title>ZXing.Net.Mobile Barcode Scanner (Respawnsive Fork)</Title>
 		<Description>
-			ZXing.Net.Mobile is a C#/.NET library based on the open source Barcode Library: ZXing (Zebra Crossing), using the ZXing.Net Port. It works with Xamarin.iOS, Xamarin.Android. The goal of ZXing.Net.Mobile is to make scanning barcodes as effortless and painless as possible in your own applications.
+			ZXing.Net.Mobile is a C#/.NET library based on the open source Barcode Library: ZXing (Zebra Crossing), using the ZXing.Net Port. It works with .NET for Android &amp; iOS. The goal of ZXing.Net.Mobile is to make scanning barcodes as effortless and painless as possible in your own applications.
 
 			See https://github.com/Redth/ZXing.Net.Mobile/releases for release notes.
 		</Description>
@@ -45,19 +45,18 @@
 		<Compile Include="**\*.netstandard.cs" />
 		<Compile Include="**\*.netstandard.*.cs" />
 	</ItemGroup>
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('net10.0-android')) ">
 		<Compile Include="**\*.android.cs" />
 		<Compile Include="**\*.android.*.cs" />
 		<AndroidResource Include="Resources\layout\*.axml" />
-		<PackageReference Include="FastAndroidCamera" Version="2.0.0" />
-		<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.0" />
+		<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.4" />
 	</ItemGroup>
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('net10.0-ios')) ">
 		<Compile Include="**\*.ios.cs" />
 		<Compile Include="**\*.ios.*.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
-		<PackageReference Include="ZXing.Net" Version="0.16.9" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.80" />
+		<PackageReference Include="ZXing.Net" Version="0.16.11" />
 	</ItemGroup>
 </Project>

@@ -117,12 +117,9 @@ namespace ZXing.Mobile
 			textBottom.SizeToFit();
 			AddSubview(textBottom);
 
-			var captureDevice = AVCaptureDevice.DefaultDeviceWithMediaType(AVMediaType.Video);
+			var captureDevice = AVCaptureDevice.GetDefaultDevice(AVMediaTypes.Video);
 
-			var hasTorch = false;
-
-			if (captureDevice != null)
-				hasTorch = captureDevice.TorchAvailable;
+			var hasTorch = captureDevice?.TorchAvailable ?? false;
 
 			InvokeOnMainThread(delegate
 			{

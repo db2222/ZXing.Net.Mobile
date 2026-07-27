@@ -102,20 +102,13 @@ namespace ZXing.Mobile
 			};
 
 			// create a device input and attach it to the session
-			//			var captureDevice = AVCaptureDevice.DefaultDeviceWithMediaType (AVMediaType.Video);
-			AVCaptureDevice captureDevice = null;
-			var devices = AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video);
-			foreach (var device in devices)
-			{
-				captureDevice = device;
-				if (ScanningOptions.UseFrontCameraIfAvailable.HasValue &&
-					ScanningOptions.UseFrontCameraIfAvailable.Value &&
-					device.Position == AVCaptureDevicePosition.Front)
-
-					break; //Front camera successfully set
-				else if (device.Position == AVCaptureDevicePosition.Back && (!ScanningOptions.UseFrontCameraIfAvailable.HasValue || !ScanningOptions.UseFrontCameraIfAvailable.Value))
-					break; //Back camera succesfully set
-			}
+			var cameraPosition = ScanningOptions.UseFrontCameraIfAvailable.GetValueOrDefault()
+				? AVCaptureDevicePosition.Front
+				: AVCaptureDevicePosition.Back;
+			var captureDevice = AVCaptureDevice.GetDefaultDevice(
+				AVCaptureDeviceType.BuiltInWideAngleCamera,
+				AVMediaTypes.Video,
+				cameraPosition);
 			if (captureDevice == null)
 			{
 				Console.WriteLine("No captureDevice - this won't work on the simulator, try a physical device");
@@ -339,10 +332,7 @@ namespace ZXing.Mobile
 		public void Focus(CGPoint pointOfInterest)
 		{
 			//Get the device
-			if (AVMediaType.Video == null)
-				return;
-
-			var device = AVCaptureDevice.DefaultDeviceWithMediaType(AVMediaType.Video);
+			var device = AVCaptureDevice.GetDefaultDevice(AVMediaTypes.Video);
 
 			if (device == null)
 				return;
@@ -439,8 +429,8 @@ namespace ZXing.Mobile
 		{
 			try
 			{
-				var device = AVCaptureDevice.DefaultDeviceWithMediaType(AVMediaType.Video);
-				if (device.HasFlash || device.HasTorch)
+				var device = AVCaptureDevice.GetDefaultDevice(AVMediaTypes.Video);
+				if (device != null && (device.HasFlash || device.HasTorch))
 				{
 					device.LockForConfiguration(out var err);
 
@@ -499,8 +489,8 @@ namespace ZXing.Mobile
 				if (hasTorch.HasValue)
 					return hasTorch.Value;
 
-				var device = AVCaptureDevice.DefaultDeviceWithMediaType(AVMediaType.Video);
-				hasTorch = device.HasFlash || device.HasTorch;
+				var device = AVCaptureDevice.GetDefaultDevice(AVMediaTypes.Video);
+				hasTorch = (device?.HasFlash ?? false) || (device?.HasTorch ?? false);
 				return hasTorch.Value;
 			}
 		}

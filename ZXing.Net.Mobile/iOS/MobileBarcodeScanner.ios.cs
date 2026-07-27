@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Foundation;
 using CoreFoundation;
 using UIKit;
+using Microsoft.Maui.ApplicationModel;
 
 namespace ZXing.Mobile
 {
@@ -18,7 +19,7 @@ namespace ZXing.Mobile
 			=> weakAppController = new WeakReference<UIViewController>(delegateController);
 
 		public MobileBarcodeScanner()
-			=> weakAppController = new WeakReference<UIViewController>(Xamarin.Essentials.Platform.GetCurrentUIViewController());
+			=> weakAppController = new WeakReference<UIViewController>(Platform.GetCurrentUIViewController());
 
 		public Task<Result> Scan(bool useAVCaptureEngine)
 			=> Scan(new MobileBarcodeScanningOptions(), useAVCaptureEngine);

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Android.Content;
+using Microsoft.Maui.ApplicationModel;
 using ZXing;
 using Android.OS;
 
@@ -11,9 +12,9 @@ namespace ZXing.Mobile
 	{
 		public const string TAG = "ZXing.Net.Mobile";
 
-		[Obsolete("Use Xamarin.Essentials.Platform.Init instead")]
+		[Obsolete("Use Microsoft.Maui.ApplicationModel.Platform.Init instead")]
 		public static void Initialize(Android.App.Application app)
-			=> Xamarin.Essentials.Platform.Init(app);
+			=> Platform.Init(app);
 
 		[Obsolete("No longer necessary.")]
 		public static void Uninitialize(Android.App.Application app)
@@ -25,7 +26,7 @@ namespace ZXing.Mobile
 		bool torch = false;
 
 		Context GetContext(Context context)
-			=> Xamarin.Essentials.Platform.CurrentActivity ?? Xamarin.Essentials.Platform.AppContext;
+			=> Platform.CurrentActivity ?? Platform.AppContext;
 
 		internal void PlatformScanContinuously(MobileBarcodeScanningOptions options, Action<Result> scanHandler)
 			=> ScanContinuously(null, options, scanHandler);

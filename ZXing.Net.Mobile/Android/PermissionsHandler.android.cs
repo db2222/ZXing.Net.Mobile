@@ -6,13 +6,13 @@ using Android.App;
 using System.Threading.Tasks;
 using Android.Content.PM;
 using Android.Content;
-using Xamarin.Essentials;
+using Microsoft.Maui.ApplicationModel;
 
 namespace ZXing.Net.Mobile.Android
 {
 	public static class PermissionsHandler
 	{
-		[Obsolete("Use Xamarin.Essentials.Platform.OnRequestPermissionsResult instead.")]
+		[Obsolete("Use Microsoft.Maui.ApplicationModel.Platform.OnRequestPermissionsResult instead.")]
 		public static void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
 			=> Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -37,7 +37,7 @@ namespace ZXing.Net.Mobile.Android
 		internal static bool IsTorchPermissionDeclared()
 			=> Permissions.IsDeclaredInManifest(global::Android.Manifest.Permission.Flashlight);
 
-		[Obsolete("Use Xamarin.Essentials.Permissions instead.")]
+		[Obsolete("Use Microsoft.Maui.ApplicationModel.Permissions instead.")]
 		public static bool NeedsPermissionRequest(Activity activity = null)
 			=> true;
 	}

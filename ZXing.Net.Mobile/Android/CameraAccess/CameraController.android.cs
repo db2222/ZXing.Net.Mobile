@@ -7,7 +7,6 @@ using Android.Hardware;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using ApxLabs.FastAndroidCamera;
 using Camera = Android.Hardware.Camera;
 
 namespace ZXing.Mobile.CameraAccess
@@ -81,13 +80,13 @@ namespace ZXing.Mobile.CameraAccess
 				const int NUM_PREVIEW_BUFFERS = 5;
 				for (uint i = 0; i < NUM_PREVIEW_BUFFERS; ++i)
 				{
-					using (var buffer = new FastJavaByteArray(bufferSize))
-						Camera.AddCallbackBuffer(buffer);
+					var buffer = new byte[bufferSize];
+					Camera.AddCallbackBuffer(buffer);
 				}
 
 				Camera.StartPreview();
 
-				Camera.SetNonMarshalingPreviewCallback(cameraEventListener);
+				Camera.SetPreviewCallbackWithBuffer(cameraEventListener);
 			}
 			catch (Exception ex)
 			{
@@ -133,7 +132,7 @@ namespace ZXing.Mobile.CameraAccess
 				try
 				{
 					Camera.StopPreview();
-					Camera.SetNonMarshalingPreviewCallback(null);
+					Camera.SetPreviewCallbackWithBuffer(null);
 
 					//Camera.SetPreviewCallback(null);
 
