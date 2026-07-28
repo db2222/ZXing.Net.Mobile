@@ -50,15 +50,29 @@ See https://github.com/Redth/ZXing.Net.Mobile/releases for the orignal ones.</Pa
 		<Compile Include="**\*.netstandard.cs" />
 		<Compile Include="**\*.netstandard.*.cs" />
 	</ItemGroup>
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('net10.0-android')) ">
-		<Compile Include="**\*.android.cs" />
-		<Compile Include="**\*.android.*.cs" />
-		<AndroidResource Include="Resources\layout\*.axml" />
-		<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.4" />
+	<ItemGroup>
+		<Compile Include="Android\**\*.android.cs" Visible="false" />
+		<Compile Include="Android\**\*.android.*.cs" Visible="false" />
+		<Compile Include="iOS\**\*.ios.cs" Visible="false" />
+		<Compile Include="iOS\**\*.ios.*.cs" Visible="false" />
+		<AndroidResource Include="Resources\layout\*.axml" Visible="false" />
 	</ItemGroup>
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('net10.0-ios')) ">
-		<Compile Include="**\*.ios.cs" />
-		<Compile Include="**\*.ios.*.cs" />
+	<ItemGroup>
+		<None Include="Android\**\*" Visible="true" />
+		<None Include="iOS\**\*" Visible="true" />
+		<None Include="Resources\**\*" Visible="true" />
+	</ItemGroup>
+	<ItemGroup Condition=" !$(TargetFramework.StartsWith('net10.0-android')) ">
+		<Compile Remove="Android\**\*.android.cs" />
+		<Compile Remove="Android\**\*.android.*.cs" />
+		<AndroidResource Remove="Resources\**\*.axml" />
+	</ItemGroup>
+	<ItemGroup Condition=" !$(TargetFramework.StartsWith('net10.0-ios')) ">
+		<Compile Remove="iOS\**\*.ios.cs" />
+		<Compile Remove="iOS\**\*.ios.*.cs" />
+	</ItemGroup>
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('net10.0-android')) ">
+		<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.90" />
