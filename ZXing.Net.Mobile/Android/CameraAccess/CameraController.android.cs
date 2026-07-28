@@ -329,15 +329,15 @@ namespace ZXing.Mobile.CameraAccess
 				return;
 			}
 
-			var cameraParams = Camera.GetParameters();
-
 			Android.Util.Log.Debug(MobileBarcodeScanner.TAG, "AutoFocus Requested");
+
+			try
+			{
+				var cameraParams = Camera.GetParameters();
 
 			// Cancel any previous requests
 			Camera.CancelAutoFocus();
 
-			try
-			{
 				// If we want to use coordinates
 				// Also only if our camera supports Auto focus mode
 				// Since FocusAreas only really work with FocusModeAuto set
