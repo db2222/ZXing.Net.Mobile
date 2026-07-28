@@ -78,6 +78,8 @@ namespace ZXing.Mobile
 			Window.AddFlags(WindowManagerFlags.Fullscreen); //to show
 			Window.AddFlags(WindowManagerFlags.KeepScreenOn); //Don't go to sleep while scanning
 
+			ScanningOptions ??= MobileBarcodeScanningOptions.Default;
+
 			if (ScanningOptions.AutoRotate.HasValue && !ScanningOptions.AutoRotate.Value)
 				RequestedOrientation = ScreenOrientation.Nosensor;
 
