@@ -3,32 +3,37 @@
 		<TargetFrameworks>netstandard2.0;net10.0-android36.1;net10.0-ios26.5</TargetFrameworks>
 		<AssemblyName>ZXingNetMobile</AssemblyName>
 		<RootNamespace>ZXing.Net.Mobile</RootNamespace>
-		<PackageId>Respawnsive.ZXing.Net.Mobile</PackageId>
+		<PackageId>db2222.ZXing.Net.Mobile</PackageId>
 		<PackageIcon>icon.png</PackageIcon>
 		<Summary>ZXing Barcode Scanning for your .NET Android &amp; iOS apps</Summary>
 		<PackageTags></PackageTags>
-		<Title>ZXing.Net.Mobile Barcode Scanner (Respawnsive Fork)</Title>
+		<Title>ZXing.Net.Mobile Barcode Scanner (db2222 Fork)</Title>
 		<Description>
 			ZXing.Net.Mobile is a C#/.NET library based on the open source Barcode Library: ZXing (Zebra Crossing), using the ZXing.Net Port. It works with .NET for Android &amp; iOS. The goal of ZXing.Net.Mobile is to make scanning barcodes as effortless and painless as possible in your own applications.
 
-			See https://github.com/Redth/ZXing.Net.Mobile/releases for release notes.
+			The original project is https://github.com/Redth/ZXing.Net.Mobile.
+			It is dead and the successor is https://github.com/Redth/ZXing.Net.MAUI.
+			But if you use .NET Android or iOS instead of MAUI you can't use it.
+			This project is a fork to switch to modern .NET Android/iOS with necessary bugfixes.
+			It is forked from the fork https://github.com/Respawnsive/ZXing.Net.Mobile to have the mentioned fix from https://github.com/Redth/ZXing.Net.Mobile/issues/924#issuecomment-1430058104.
 		</Description>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<AssemblyVersion>3.0.0.0</AssemblyVersion>
-		<AssemblyFileVersion>3.0.0.0</AssemblyFileVersion>
-		<Version>3.0.0</Version>
+		<Version>3.0.1</Version>
 		<PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
-		<Authors>Redth</Authors>
+		<Authors>Redth, Respawnsive &amp; db2222</Authors>
 		<Owners>Redth</Owners>
 		<NeutralLanguage>en</NeutralLanguage>
 		<Copyright>© Redth</Copyright>
-		<RepositoryUrl>https://github.com/redth/ZXing.Net.Mobile</RepositoryUrl>
-		<PackageReleaseNotes>See: https://github.com/Redth/ZXing.Net.Mobile/releases</PackageReleaseNotes>
+		<RepositoryUrl>https://github.com/db2222/ZXing.Net.Mobile</RepositoryUrl>
+		<PackageReleaseNotes>v3.0.1
+- First release after .NET modernization
+
+See https://github.com/Redth/ZXing.Net.Mobile/releases for the orignal ones.</PackageReleaseNotes>
 		<DefineConstants>$(DefineConstants);</DefineConstants>
 		<UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>http://github.com/Redth/ZXing.Net.Mobile</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/db2222/ZXing.Net.Mobile</PackageProjectUrl>
 		<DebugType>portable</DebugType>
 		<Configurations>Debug;Release</Configurations>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -56,7 +61,7 @@
 		<Compile Include="**\*.ios.*.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.80" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.90" />
 		<PackageReference Include="ZXing.Net" Version="0.16.11" />
 	</ItemGroup>
 </Project>
