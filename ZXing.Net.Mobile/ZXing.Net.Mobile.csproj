@@ -18,14 +18,17 @@
 			It is forked from the fork https://github.com/Respawnsive/ZXing.Net.Mobile to have the mentioned fix from https://github.com/Redth/ZXing.Net.Mobile/issues/924#issuecomment-1430058104.
 		</Description>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
-		<Version>3.0.1</Version>
+		<Version>3.0.2</Version>
 		<PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
 		<Authors>Redth, Respawnsive &amp; db2222</Authors>
 		<Owners>Redth</Owners>
 		<NeutralLanguage>en</NeutralLanguage>
 		<Copyright>© Redth</Copyright>
 		<RepositoryUrl>https://github.com/db2222/ZXing.Net.Mobile</RepositoryUrl>
-		<PackageReleaseNotes>v3.0.1
+		<PackageReleaseNotes>v3.0.2
+- Bugfixes in old code
+
+v3.0.1
 - First release after .NET modernization
 
 See https://github.com/Redth/ZXing.Net.Mobile/releases for the orignal ones.</PackageReleaseNotes>
