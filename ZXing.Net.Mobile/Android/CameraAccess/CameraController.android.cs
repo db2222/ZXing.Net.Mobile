@@ -99,10 +99,17 @@ namespace ZXing.Mobile.CameraAccess
 			}
 
 			// Docs suggest if Auto or Macro modes, we should invoke AutoFocus at least once
-			var currentFocusMode = Camera.GetParameters().FocusMode;
-			if (currentFocusMode == Camera.Parameters.FocusModeAuto
-				|| currentFocusMode == Camera.Parameters.FocusModeMacro)
-				AutoFocus();
+			try
+			{
+				var currentFocusMode = Camera.GetParameters().FocusMode;
+				if (currentFocusMode == Camera.Parameters.FocusModeAuto
+					|| currentFocusMode == Camera.Parameters.FocusModeMacro)
+					AutoFocus();
+			}
+			catch (Exception ex)
+			{
+				Android.Util.Log.Debug(MobileBarcodeScanner.TAG, "SetupCamera GetParameters failed: {0}", ex);
+			}
 		}
 
 		public void AutoFocus()
