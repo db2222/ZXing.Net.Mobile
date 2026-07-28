@@ -335,8 +335,8 @@ namespace ZXing.Mobile.CameraAccess
 			{
 				var cameraParams = Camera.GetParameters();
 
-			// Cancel any previous requests
-			Camera.CancelAutoFocus();
+				// Cancel any previous requests
+				Camera.CancelAutoFocus();
 
 				// If we want to use coordinates
 				// Also only if our camera supports Auto focus mode
